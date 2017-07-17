@@ -2,6 +2,11 @@
     "name": "galek/doctrine-fb-driver",
     "description": "Doctrine 2 - Firebird Driver",
     "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Doctrine\\DBAL\\": "src/"
+        }
+    },
     "require": {
         "doctrine/dbal": "^2.5"
     }
