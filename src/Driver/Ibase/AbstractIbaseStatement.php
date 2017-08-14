@@ -586,7 +586,7 @@ abstract class AbstractIbaseStatement implements \IteratorAggregate, Statement
      * @param int $fetchMode
      * @param null|string $optArg1 
      */
-    public function fetch($fetchMode = null, $optArg1 = null)
+    public function fetch($fetchMode = null, $cursorOrientation = \PDO::FETCH_ORI_NEXT, $optArg1 = null)
     {
     	$fetchMode !== null || $fetchMode = $this->defaultFetchMode;
 
