@@ -186,21 +186,22 @@ class AbstractFbIbSchemaManager extends \Doctrine\DBAL\Schema\AbstractSchemaMana
     	}
 
 
-
-    	if (preg_match('/^.*default\s*\'(.*)\'\s*$/i', $tableColumn['FIELD_DEFAULT_SOURCE'], $matches)) {
-    		// default definition is a string
-            $options['default'] = $matches[1];
-    	} else {
-    		if (preg_match('/^.*DEFAULT\s*(.*)\s*/i', $tableColumn['FIELD_DEFAULT_SOURCE'], $matches)) {
-    			// Default is numeric or a constant or a function
-                $options['default'] = $matches[1];
-    			if (strtoupper(trim($options['default'])) == 'NULL') {
-    				$options['default'] = null;
-    			} else {
-    				// cannot handle other defaults at the moment - just ignore it for now
-    			}
-    		}
-    	}
+        if ($tableColumn['FIELD_DEFAULT_SOURCE'] !== null) {
+            if (preg_match('/^.*default\s*\'(.*)\'\s*$/i', $tableColumn[ 'FIELD_DEFAULT_SOURCE' ], $matches)) {
+                // default definition is a string
+                $options[ 'default' ] = $matches[ 1 ];
+            } else {
+                if (preg_match('/^.*DEFAULT\s*(.*)\s*/i', $tableColumn[ 'FIELD_DEFAULT_SOURCE' ], $matches)) {
+                    // Default is numeric or a constant or a function
+                    $options[ 'default' ] = $matches[ 1 ];
+                    if (strtoupper(trim($options[ 'default' ])) == 'NULL') {
+                        $options[ 'default' ] = null;
+                    } else {
+                        // cannot handle other defaults at the moment - just ignore it for now
+                    }
+                }
+            }
+        }
 
     	$options['notnull'] = (bool) $tableColumn['FIELD_NOT_NULL_FLAG'];
 
